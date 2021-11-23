@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Jump</string>
+    <string name="accessibility_desc">立志于跳过所有可以跳过的广告</string>
+    <string name="jump_toast">Jump</string>
+</resources>
