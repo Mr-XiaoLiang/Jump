@@ -12,7 +12,7 @@ object Preferences {
     private const val JUMP_DELAY = "JUMP_DELAY"
     private const val JUMP_TOAST = "JUMP_TOAST"
 
-    const val DEF_JUMP_DELAY = 100L
+    const val DEF_JUMP_DELAY = 500L
 
     private const val DEF_JUMP_TOAST = R.string.jump_toast
 

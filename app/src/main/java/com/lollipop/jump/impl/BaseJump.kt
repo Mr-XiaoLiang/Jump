@@ -13,7 +13,7 @@ abstract class BaseJump : JumpService.Jump() {
 
     private val delayTaskList = LinkedList<CommonUtil.Task<BaseJump>>()
 
-    var taskDelay = 100L
+    var taskDelay = Preferences.DEF_JUMP_DELAY
         private set
 
     var jumpToast: String = ""

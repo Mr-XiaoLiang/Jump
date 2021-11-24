@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityNodeInfo
+import android.widget.Toast
 import com.lollipop.jump.impl.DefaultJumpImpl
 
 /**
@@ -37,34 +38,21 @@ class JumpService : AccessibilityService() {
             }
         }
     }
-
-    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+    override fun onCreate() {
+        super.onCreate()
         registerReceiver(configChangedListener, IntentFilter(ACTION_CONFIG_CHANGED))
-        return super.onStartCommand(intent, flags, startId)
+        checkJumpImpl()
+        Toast.makeText(applicationContext, "服务起来啦", Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroy() {
         super.onDestroy()
         unregisterReceiver(configChangedListener)
-    }
-
-    override fun onServiceConnected() {
-        super.onServiceConnected()
-        checkJumpImpl()
-    }
-
-    override fun onUnbind(intent: Intent?): Boolean {
         jumpList.forEach {
             it.destroy()
             it.context = null
         }
         jumpList.clear()
-        return true
-    }
-
-    override fun onRebind(intent: Intent?) {
-        super.onRebind(intent)
-        checkJumpImpl()
     }
 
     private fun checkJumpImpl() {
