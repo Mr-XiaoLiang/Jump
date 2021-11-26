@@ -15,6 +15,7 @@ import com.lollipop.jump.impl.DefaultJumpImpl
  * @date 2021/11/23 20:54
  * 有点搞不定了，决定参考https://github.com/zfdang/Android-Touch-Helper
  * 还有https://github.com/LGH1996/AccessibilityTool
+ * 明天加班，什么都不想写
  */
 class JumpService : AccessibilityService() {
 
