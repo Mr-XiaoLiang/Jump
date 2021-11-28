@@ -94,6 +94,8 @@ class JumpService : AccessibilityService() {
                 it.doJump(event, source)
             }
         }
+        // 发送手势！！
+//        dispatchGesture()
     }
 
     override fun onInterrupt() {
