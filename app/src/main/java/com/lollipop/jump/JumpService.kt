@@ -17,6 +17,7 @@ import com.lollipop.jump.impl.DefaultJumpImpl
  * 还有https://github.com/LGH1996/AccessibilityTool
  * 明天加班，什么都不想写
  * 难受，敷衍的更新
+ * 今天加班太晚了，不弄了，先拖一段时间
  */
 class JumpService : AccessibilityService() {
 
