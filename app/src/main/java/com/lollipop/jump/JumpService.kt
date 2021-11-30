@@ -95,8 +95,6 @@ class JumpService : AccessibilityService() {
                 it.doJump(event, source)
             }
         }
-        // 发送手势！！
-//        dispatchGesture()
     }
 
     override fun onInterrupt() {
@@ -107,7 +105,7 @@ class JumpService : AccessibilityService() {
 
     abstract class Jump {
 
-        var context: Context? = null
+        var context: JumpService? = null
 
         open fun onCreate() {}
 

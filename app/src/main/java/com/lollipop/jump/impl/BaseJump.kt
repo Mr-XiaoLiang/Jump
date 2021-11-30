@@ -1,5 +1,9 @@
 package com.lollipop.jump.impl
 
+import android.accessibilityservice.GestureDescription
+import android.accessibilityservice.GestureDescription.StrokeDescription
+import android.graphics.Path
+import android.graphics.Rect
 import android.view.accessibility.AccessibilityNodeInfo
 import android.widget.Toast
 import com.lollipop.jump.*
@@ -68,4 +72,29 @@ abstract class BaseJump : JumpService.Jump() {
         }
     }
 
+    protected fun click(node: AccessibilityNodeInfo) {
+        val bounds = Rect()
+        node.getBoundsInScreen(bounds)
+        click(bounds.centerX(), bounds.centerY())
+    }
+
+    protected fun click(
+        x: Int,
+        y: Int,
+        startTime: Long = System.currentTimeMillis(),
+        duration: Long = 40
+    ) {
+        context?.dispatchGesture(
+            GestureDescription.Builder()
+                .addStroke(
+                    StrokeDescription(
+                        Path().apply { moveTo(x.toFloat(), y.toFloat()) },
+                        startTime,
+                        duration
+                    )
+                ).build(),
+            null,
+            null
+        )
+    }
 }

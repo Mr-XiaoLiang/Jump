@@ -17,19 +17,25 @@ class DefaultJumpImpl : BaseJump() {
         return true
     }
 
+    private var currentPage = ""
+
     override fun doJump(event: AccessibilityEvent, source: AccessibilityNodeInfo) {
+        val lastPage = currentPage
+        currentPage = event.className.toString()
+//        if (lastPage != currentPage) {
+//            doTask {
+////                clickButton(source.findAccessibilityNodeInfosByText("跳过"))
+//                jumpBytedance(source)
+//            }
+//        }
         doTask {
-            clickButton(source.findAccessibilityNodeInfosByText("跳过"))
             jumpBytedance(source)
         }
     }
 
     private fun clickButton(jumpList: List<AccessibilityNodeInfo>): Boolean {
         jumpList.forEach {
-            it.performAction(AccessibilityNodeInfo.ACTION_FOCUS)
-            it.performAction(AccessibilityNodeInfo.ACTION_CLICK)
-            // 父容器也点一下
-            it.parent?.performAction(AccessibilityNodeInfo.ACTION_CLICK)
+            click(it)
         }
         val notEmpty = jumpList.isNotEmpty()
         if (notEmpty) {
@@ -39,20 +45,7 @@ class DefaultJumpImpl : BaseJump() {
     }
 
     private fun jumpBytedance(source: AccessibilityNodeInfo): Boolean {
-        val infoArray = LinkedList<AccessibilityNodeInfo>()
-        infoArray.addLast(source)
-        while (infoArray.isNotEmpty()) {
-            val info = infoArray.removeFirst()
-            if (info.className?.contains("TTCountdownView") == true) {
-                clickButton(listOf(info))
-                return true
-            }
-            val childCount = info.childCount
-            for (index in 0 until childCount) {
-                infoArray.addLast(info.getChild(index))
-            }
-        }
-//        clickButton(source.findAccessibilityNodeInfosByViewId("tt_splash_skip_btn"))
+        clickButton(source.findAccessibilityNodeInfosByViewId("tt_splash_skip_btn"))
         return false
     }
 
